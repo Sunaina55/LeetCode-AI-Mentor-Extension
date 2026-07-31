@@ -29,7 +29,7 @@ setTimeout(function () {
             headers: {
               "Content-Type": "application/json",
               Authorization:
-                "Bearer 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",
+                "Bearer " + GROQ_API_KEY,
             },
             body: JSON.stringify({
               model: "llama-3.3-70b-versatile",
