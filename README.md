@@ -1,17 +1,33 @@
-# 🧠 LeetCode AI Hint Extension
+# AI Mentor — LeetCode Chrome Extension
 
-A Chrome Extension that injects a **"GET HINT"** button on LeetCode problem pages and provides structured, mentor-style hints using **Groq API (llama-3.3-70b-versatile)** — without ever giving away the solution.
+A Chrome Extension that injects an **"AI Mentor"** dropdown on LeetCode problem pages, providing structured AI-powered assistance using **Groq API (llama-3.3-70b-versatile)** — without ever giving away the solution.
 
 ---
 
 ## ✨ Features
 
-- 💡 **Context-aware hints** — reads problem title, description & constraints directly from the DOM
-- 🧩 **Structured approach hints** — Brute Force, Better, and Optimal (where applicable)
-- 📌 **Topic identification** — detects patterns like Sliding Window, Two Pointers, DP, Graphs, etc.
-- 🔒 **No direct answers** — hints guide you to think, not to copy
-- ⚡ **Powered by Groq** — fast LLM inference using llama-3.3-70b-versatile
-- 🎯 **Works on any LeetCode problem**
+### 💡 Get Hint
+- Reads problem title, description & constraints from DOM
+- Identifies Brute Force, Better, and Optimal approaches
+- Suggests relevant topics (Sliding Window, DP, Graphs, etc.)
+- Gives time & space complexity hints
+
+### 🔍 Next Line
+- Reads your current code from the editor
+- Gives a hint for what the next line should do
+- Includes a small code snippet hint (e.g. `mpp.find(rem)`)
+- Never gives the full line — just nudges you forward
+
+### 📊 Analyze Code
+- Analyzes your submitted or in-progress code
+- Identifies which approach you used (Brute/Better/Optimal)
+- Points out specific inefficiencies with alternatives
+- Works on partial/incomplete code too
+
+### 📋 Copy with Main
+- Reads your solution code from the editor
+- Generates a complete C++ file with `#include <bits/stdc++.h>`, proper `int main()`, sample test cases & expected output
+- Copies to clipboard — paste directly in VS Code
 
 ---
 
@@ -23,6 +39,7 @@ A Chrome Extension that injects a **"GET HINT"** button on LeetCode problem page
 - Groq API (`llama-3.3-70b-versatile`)
 - DOM Manipulation
 - Fetch API + async/await
+- Prompt Engineering
 
 ---
 
@@ -32,8 +49,8 @@ A Chrome Extension that injects a **"GET HINT"** button on LeetCode problem page
 LeetCode-AI-Hint-Extension/
 ├── manifest.json          # Extension config (Manifest V3)
 ├── content.js             # Injected into LeetCode pages
-├── content.css            # Styles for hint box & button
-├── prompt.js              # Prompt engineering logic
+├── content.css            # Dark theme styles
+├── prompt.js              # Prompt engineering (4 prompts)
 ├── config.js              # API key (NOT pushed to GitHub)
 ├── config.example.js      # API key template
 ├── popup.html             # Extension popup UI
@@ -54,7 +71,7 @@ cd LeetCode-AI-Hint-Extension
 
 ### 2. Get your Groq API Key
 - Go to [console.groq.com](https://console.groq.com)
-- Sign up and create a free API key
+- Sign up and create a free API key (~14,400 requests/day free)
 
 ### 3. Create `config.js`
 Create a file named `config.js` in the project folder:
@@ -62,7 +79,7 @@ Create a file named `config.js` in the project folder:
 const GROQ_API_KEY = "your_groq_api_key_here"
 ```
 
-> ⚠️ `config.js` is in `.gitignore` — it will NOT be pushed to GitHub. Keep your key safe!
+> ⚠️ `config.js` is in `.gitignore` — it will NOT be pushed to GitHub.
 
 ### 4. Load Extension in Chrome
 1. Open Chrome → go to `chrome://extensions`
@@ -72,46 +89,35 @@ const GROQ_API_KEY = "your_groq_api_key_here"
 
 ### 5. Use it!
 - Go to any LeetCode problem page
-- Click the **"GET HINT"** button (bottom right corner)
-- Get structured hints — no spoilers! 🎯
+- Click **🤖 AI Mentor** button (bottom right)
+- Choose from 4 options!
 
 ---
 
-## 💡 How Hints Work
-
-For every problem, the extension:
-1. Reads the full problem (title + description + constraints) from DOM
-2. Sends it to Groq API with a custom mentor prompt
-3. Gets back hints in this format:
+## 💡 How It Works
 
 ```
-Problem Type: Array, Hashing
-
-Possible Topics: Hash Map, Two Pointers
-
-Possible Approaches: Brute Force, Better, Optimal
-
-Approach 1 (Brute Force):
-• Use nested loops to check all pairs
-• Time Complexity: O(n²)
-
-Approach 2 (Optimal):
-• Think about using a Hash Map
-• Store complement of each element
-• Time Complexity: O(n)
+User clicks AI Mentor
+        ↓
+Dropdown opens (4 options)
+        ↓
+Content script reads DOM
+(title + description + editor code)
+        ↓
+Groq API called with custom prompt
+        ↓
+Response shown in hint box
 ```
 
 ---
 
 ## ⚠️ Important Notes
 
-- `config.js` is NOT included in this repo — you must create it yourself
-- This extension is for **learning purposes only**
+- `config.js` is NOT included — create it yourself with your Groq key
+- Works on any LeetCode problem page
+- Supports all languages (C++, Python, Java, etc.) for hints
+- Copy with Main generates C++ only
 - Not affiliated with LeetCode
-- Free Groq API has ~14,400 requests/day limit
 
 ---
 
-## 📄 License
-
-MIT License
