@@ -52,7 +52,7 @@ setTimeout(function () {
           },
 
           body: JSON.stringify({
-            model: "llama-3.3-70b-versatile",
+            model: "openai/gpt-oss-120b",
 
             messages: [
               {
@@ -77,6 +77,18 @@ setTimeout(function () {
       showHintBox(hint);
     }
 
+    function escapeHTML(str) {
+      const div = document.createElement("div");
+      div.innerText = str;
+      return div.innerHTML;
+    }
+
+    function formatHint(text) {
+      let safe = escapeHTML(text);
+      safe = safe.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+      safe = safe.replace(/\n/g, "<br>");
+      return safe;
+    }
     function showHintBox(hint) {
       let hintBox = document.getElementById("hint-box");
 
@@ -101,7 +113,7 @@ setTimeout(function () {
 
       const hintTextEl = document.getElementById("hint-text");
       if (hintTextEl) {
-        hintTextEl.innerText = hint;
+        hintTextEl.innerHTML = formatHint(hint);
       }
       hintBox.style.display = "block";
     }
@@ -120,7 +132,7 @@ setTimeout(function () {
             Authorization: "Bearer " + GROQ_API_KEY,
           },
           body: JSON.stringify({
-            model: "llama-3.3-70b-versatile",
+            model: "openai/gpt-oss-120b",
             messages: [
               {
                 role: "user",
@@ -150,7 +162,7 @@ setTimeout(function () {
             Authorization: "Bearer " + GROQ_API_KEY,
           },
           body: JSON.stringify({
-            model: "llama-3.3-70b-versatile",
+            model: "openai/gpt-oss-120b",
             messages: [
               {
                 role: "user",
@@ -184,7 +196,7 @@ setTimeout(function () {
             Authorization: "Bearer " + GROQ_API_KEY,
           },
           body: JSON.stringify({
-            model: "llama-3.3-70b-versatile",
+            model: "openai/gpt-oss-120b",
             messages: [
               {
                 role: "user",

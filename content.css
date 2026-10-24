@@ -55,6 +55,10 @@
 #mentor-dropdown button:hover {
     background-color: #2d2d44;
 }
+#mentor-dropdown button:active {
+    background-color: #24243a;
+    transform: scale(0.97);
+}
 
 #hint-box {
     position: fixed;
@@ -62,7 +66,6 @@
     right: 20px;
     width: 320px;
     max-height: 70vh;
-    overflow-y: auto;
     background-color: #1e1e2e;
     border: 0.5px solid #3f3f5a;
     border-radius: 12px;
@@ -70,10 +73,11 @@
     z-index: 10000;
     display: none;
     box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-    white-space: pre-wrap;
     font-size: 13px;
     line-height: 1.6;
     color: #e2e8f0;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 #hint-close-btn {
@@ -87,4 +91,23 @@
     font-size: 12px;
     cursor: pointer;
     color: #94a3b8;
+    z-index: 10001;
+}
+
+#hint-text {
+    max-height: 65vh;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    margin-top: 1.5rem;
+    padding-right: 8px;
+    box-sizing: border-box;
+}
+
+#hint-text::-webkit-scrollbar {
+    width: 6px;
+}
+
+#hint-text::-webkit-scrollbar-thumb {
+    background: #3f3f5a;
+    border-radius: 3px;
 }
